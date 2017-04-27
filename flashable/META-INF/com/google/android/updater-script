@@ -1,0 +1,38 @@
+get_device_compatible("ferrari") == "OK" || abort("This package is for \"ferrari\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+
+ui_print("flashing firmware images...");
+
+ui_print("flashing tz...");
+package_extract_file("images/tz.mbn", "/dev/block/bootdevice/by-name/tz");
+
+ui_print("flashing hyp...");
+package_extract_file("images/hyp.mbn", "/dev/block/bootdevice/by-name/hyp");
+
+ui_print("flashing sbl1...");
+package_extract_file("images/sbl1.mbn", "/dev/block/bootdevice/by-name/sbl1");
+
+ui_print("flashing rpm...");
+package_extract_file("images/rpm.mbn", "/dev/block/bootdevice/by-name/rpm");
+
+ui_print("flashing aboot...");
+package_extract_file("images/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/aboot");
+
+ui_print("flashing modem...");
+package_extract_file("images/NON-HLOS.bin", "/dev/block/bootdevice/by-name/modem");
+
+ui_print("backup tz...");
+package_extract_file("images/tz.mbn", "/dev/block/bootdevice/by-name/tzbak");
+
+ui_print("backup hyp...");
+package_extract_file("images/hyp.mbn", "/dev/block/bootdevice/by-name/hypbak");
+
+ui_print("backup sbl1...");
+package_extract_file("images/sbl1.mbn", "/dev/block/bootdevice/by-name/sbl1bak");
+
+ui_print("backup rpm...");
+package_extract_file("images/rpm.mbn", "/dev/block/bootdevice/by-name/rpmbak");
+
+ui_print("backup aboot...");
+package_extract_file("images/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/abootbak");
+
+ui_print("done!");

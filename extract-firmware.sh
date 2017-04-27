@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 mkdir -p temp
 rm -rf temp/*
 
@@ -36,6 +38,16 @@ for img in ${images[@]}; do
 
 	mv "${img_nomd5}.tgz" ../images/"${img_nomd5}_${md5sums}.firmware.tgz"
 	echo "${img_nomd5}_${md5sums}.firmware.tgz"
+
+	# time to maketh zip!
+	# we are in temp/
+	( cd "${img_nomd5}/" && zip -qr ../"${img_nomd5}.zip" * --exclude="*boot.img" --exclude="*persist.img" )
+	( cd ../flashable && zip -qur ../temp/"${img_nomd5}.zip" META-INF/ )
+	md5suml=$( md5sum ${img_nomd5}.zip )
+	md5sums=${md5suml:0:10}
+
+	mv "${img_nomd5}.zip" ../images/"${img_nomd5}_${md5sums}.firmware.zip"
+	echo "${img_nomd5}_${md5sums}.firmware.zip"
 
 	# back to home base
 	cd ..

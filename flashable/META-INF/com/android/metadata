@@ -1,0 +1,3 @@
+post-build=Xiaomi/ferrari/ferrari:5.0.2/LRX22G/V6.6.10.0.LXIMICF:user/release-keys
+post-timestamp=1438775081
+pre-device=ferrari
