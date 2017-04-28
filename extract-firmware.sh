@@ -2,8 +2,11 @@
 
 set -euo pipefail
 
+function finish {
+	rm -rf temp
+}
+trap finish EXIT
 mkdir -p temp
-rm -rf temp/*
 
 images=$( ls images/*.tgz | grep -vE ".*\.firmware\.tgz$" )
 for img in ${images[@]}; do
@@ -52,5 +55,3 @@ for img in ${images[@]}; do
 	# back to home base
 	cd ..
 done
-
-rm -rf temp
